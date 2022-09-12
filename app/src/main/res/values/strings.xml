@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">CRUDson</string>
+
+    <string name="hint_nome">Digite o seu nome</string>
+    <string name="hint_endereco">Digite o seu endereço</string>
+    <string name="hint_bairro">Digite o seu bairro</string>
+    <string name="hint_cep">Digite o seu CEP</string>
+    <string name="btn_submit">Enviar</string>
+    <string name="btn_to_list">Listagem</string>
+
+    <string name="nome">Nome</string>
+    <string name="endereco">Endereco</string>
+    <string name="bairro">Bairro</string>
+    <string name="cep">Cep</string>
+    <string name="title_activity_navbar">navbar</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+</resources>

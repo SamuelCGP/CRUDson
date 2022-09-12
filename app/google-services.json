@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "827684832407",
+    "project_id": "crudson-84806",
+    "storage_bucket": "crudson-84806.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:827684832407:android:0321e04335a815f36115d2",
+        "android_client_info": {
+          "package_name": "com.example.crudson"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "827684832407-l8d2l3au121a5rqpfdd5ftb9879h50ce.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4PAeTbkJ6N6u70_NuOY1e5EU6zEbijio"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "827684832407-l8d2l3au121a5rqpfdd5ftb9879h50ce.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
