@@ -33,7 +33,9 @@ class List : AppCompatActivity() {
         val textRow = TextView(this)
         textRow.gravity = Gravity.CENTER_HORIZONTAL
         textRow.setTextSize(TypedValue.COMPLEX_UNIT_SP,15F)
-        textRow.setTextColor(Color.parseColor("#000000"));
+        textRow.setTextColor(Color.parseColor("#000000"))
+        textRow.setPadding(0, 10, 0, 10)
+        textRow.setBackgroundColor(Color.LTGRAY)
 
         return textRow
     }
@@ -61,9 +63,11 @@ class List : AppCompatActivity() {
     private fun drawClients(clients: MutableList<Map<String, Any>>) {
         // GET TABLE
         val table = findViewById<TableLayout>(R.id.table)
+        var rowNumber = 0
 
         // TEXT VIEWS FOR DATA
         for (data in clients) {
+            rowNumber += 1
             val nome = data["nome"].toString()
             val endereco = data["endereco"].toString()
             val bairro = data["bairro"].toString()
@@ -73,6 +77,7 @@ class List : AppCompatActivity() {
 
             // CREATING A ROW WITH THE INFOS
             val row = TableRow(this)
+            row.id = rowNumber
 
             for (info in client) {
                 val viewData = createRow()
