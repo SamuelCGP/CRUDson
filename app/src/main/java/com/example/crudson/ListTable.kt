@@ -1,5 +1,6 @@
 package com.example.crudson
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
@@ -15,16 +16,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlin.collections.List
 import kotlin.reflect.typeOf
 
 
-class List : AppCompatActivity() {
+class ListTable : AppCompatActivity() {
     private lateinit var alert: AlertDialog
+    val db = Firebase.firestore
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
+
+        val btnToCreate = findViewById<Button>(R.id.btnBack)
+
+        btnToCreate.setOnClickListener {
+            val intent = Intent(this, Create::class.java)
+            startActivity(intent)
+        }
 
         // GETTING AND DRAWING DATA
         getClients()
@@ -43,7 +53,6 @@ class List : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun getClients() {
-        val db = Firebase.firestore
         var allClients = mutableListOf<Map<String, Any>>()
         var allClientsIds = mutableListOf<String>()
 
@@ -51,11 +60,9 @@ class List : AppCompatActivity() {
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
-                    Log.d("CLIENT_DATA", "${document.id} => ${document.data}")
                     allClients.add(document.data)
                     allClientsIds.add(document.id)
                 }
-                Log.d("ALLCLIENTS", allClients.toString())
                 drawClients(allClients, allClientsIds)
             }
             .addOnFailureListener { exception ->
@@ -82,12 +89,11 @@ class List : AppCompatActivity() {
             val row = TableRow(this)
             val rowId = rowNumber.toString()
             row.id = rowId.toInt()
-            row.setOnClickListener{EditOrDelete(rowId)}
+            row.setOnClickListener{EditOrDelete(clientsIds[rowId.toInt() - 1])}
 
             for (info in client) {
                 val viewData = createRow()
                 viewData.text = info
-                Log.d("INFO $nome", info)
                 row.addView(viewData)
             }
 
@@ -96,19 +102,32 @@ class List : AppCompatActivity() {
 
     }
 
-    private fun EditOrDelete(rowId: String){
+    private fun EditOrDelete(docId: String){
         val build = AlertDialog.Builder(this)
         val view = layoutInflater.inflate(R.layout.popup_list, null)
 
         build.setView(view)
 
         view.findViewById<Button>(R.id.btnCancel)!!.setOnClickListener { alert.dismiss() }
+
+        // EDITAR
         view.findViewById<Button>(R.id.btnEdit)!!.setOnClickListener {
-            Toast.makeText(baseContext, rowId, Toast.LENGTH_SHORT).show()
+            val intent = Intent(baseContext, Edit::class.java)
+            intent.putExtra("clientId", docId)
+            startActivity(intent)
             alert.dismiss()
         }
+
+        // DELETAR
         view.findViewById<Button>(R.id.btnDelete)!!.setOnClickListener {
-            Toast.makeText(baseContext, rowId, Toast.LENGTH_SHORT).show()
+            db.collection("clients").document(docId)
+                .delete()
+                .addOnSuccessListener {
+                    Toast.makeText(baseContext, "DocumentSnapshot successfully deleted!", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(baseContext, Create::class.java)
+                    startActivity(intent)
+                }
+                .addOnFailureListener { e -> Toast.makeText(baseContext, "Error deleting document: $e", Toast.LENGTH_SHORT).show() }
             alert.dismiss()
         }
 

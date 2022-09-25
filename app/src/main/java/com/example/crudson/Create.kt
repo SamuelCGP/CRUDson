@@ -36,7 +36,7 @@ class Create : AppCompatActivity() {
         val btnToList = findViewById<Button>(R.id.btnToList)
 
         btnToList.setOnClickListener {
-            val intent = Intent(this, List::class.java)
+            val intent = Intent(this, ListTable::class.java)
             startActivity(intent)
         }
     }

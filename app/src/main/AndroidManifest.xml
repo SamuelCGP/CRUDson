@@ -14,12 +14,15 @@
         android:theme="@style/Theme.CRUDson"
         tools:targetApi="31">
         <activity
+            android:name=".Edit"
+            android:exported="false" />
+        <activity
             android:name=".navbar"
             android:exported="false"
             android:label="@string/title_activity_navbar"
             android:theme="@style/Theme.CRUDson.NoActionBar" />
         <activity
-            android:name=".List"
+            android:name=".ListTable"
             android:exported="false" />
         <activity
             android:name=".Create"
